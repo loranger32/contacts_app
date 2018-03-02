@@ -3,8 +3,9 @@ source 'https://rubygems.org'
 ruby '2.5.0'
 
 gem 'sinatra'
-gem 'sinatra/contrib'
+gem 'sinatra-contrib'
 gem 'bcrypt'
+gem 'erubis'
 
 group :development do
   gem 'thin'

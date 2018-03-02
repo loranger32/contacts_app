@@ -22,5 +22,5 @@ Features (some still in progress):
 - contacts can be linked to categories ;
 - a category's members can be shown separately ;
 
-Because the 170 course is all about back-end and Sinatra, there is little
+Because the 170 course is all about back-end and Sinatra, there is very little
 attention paid to style.
