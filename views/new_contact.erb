@@ -1,0 +1,66 @@
+<h3 class="what-action index-section">New Contact Form</h3>
+
+<form action="/contacts" class="contact-input-fields">
+  <fieldset>
+    <legend>Name</legend>
+    <label for="first-name" >First Name:
+    <input type="text" name="first-name" placeholder="First Name"
+    id="first-name" required>
+    </label><br>
+
+    <label for="last-name">Last Name:
+    <input type="text" name="last-name" placeholder="Last Name"
+    id="last-name" required>
+    </label><br>
+  </fieldset><br>
+
+  <fieldset>
+    <legend>Adress</legend>
+    <label for="street">Street:
+    <input type="text" name="street" placeholder="Street" id="street">
+    </label>
+
+    <label for="number">Nr:
+    <input type="text" name="number" placeholder="House/appartment number" 
+    id='number'></label><br>
+
+    <label for="zipcode">ZIP Code:
+    <input type="text" name="zipcode" placeholder="ZIP Code" id="zipcode">
+    </label>
+
+    <label for="country">Country:
+    <input type="text" name="country" placeholder="Country" id="country">
+    </label>
+  </fieldset><br>
+
+  <fieldset>
+    <legend>Contact info</legend>
+    <label for="phone-number">Phone Number:
+    <input type="phone" name="phone-number" placeholder="Phone Number" 
+    id="phone-number">
+    </label><br>
+
+    <label for="mail-adress">Mail Adress:
+    <input type="email" name="mail-adress" placeholder="Mail adress" 
+    id="mail-adress">
+    </label>
+  </fieldset><br>
+
+  <fieldset>
+    <legend>Birthdate</legend>
+    <label for="birthdate">Date of birth:
+    <input type="date" name="birthdate" placeholder="YYYY-MM-DD",
+    id="birthdate">
+    </label>
+  </fieldset><br>
+
+  <fieldset>
+    <legend>Category</legend>
+    <label for="category">Category:
+    <input type="text" name="category" id="category">
+    </label>
+  </fieldset><br>
+
+  <input type="submit" value="Save contact" id="save-button">
+  <a href="/">Cancel</a>
+</form>

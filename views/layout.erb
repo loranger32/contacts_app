@@ -2,17 +2,29 @@
 <html lang="en-US">
   <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="stylesheets/whitespace-reset.css">
+    <link rel="stylesheet" href="/stylesheets/whitespace-reset.css">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Sans">
-    <link rel="stylesheet" href="stylesheets/application.css">
+    <link rel="stylesheet" href="/stylesheets/application.css">
     <title>Training Contact App</title>
   </head>
-  
+
   <body>
     <header>
+      <% if session[:error] %>
+      <div class="flash-message error">
+        <%= session.delete(:error) %>
+      </div>
+      <% elsif session[:success]%>
+      <div class="flash-message success">
+        <%= session.delete(:success) %>
+      </div>
+      <% end %>
+
       <h1 id="main-title">Training Contacts App</h1>
       <h2 id="main-subtitle">A training app for the 
       <a href="https://www.launchschool.com" class="LS-link">Launch School</a> 170 course </h2>
+
+      <%== display_user_status(session) %>
     </header>
 
     <main>
@@ -20,7 +32,8 @@
     </main>
 
     <footer>
-      
+      <p><small>Made with joy and enthousiasm by <a href="http://www.spectrums.be">SpectrumS</a> |
+      2018</small>
     </footer>
   </body>
 </html>
