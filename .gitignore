@@ -112,6 +112,5 @@ Temporary Items
 .rubocop.yml
 
 # Users and contacts files
-users/
-data/
-*.yaml
+users/*.yaml
+data/*.yaml
