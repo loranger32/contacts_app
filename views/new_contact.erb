@@ -5,35 +5,39 @@
     <legend>Name</legend>
     <label for="first-name" >First Name:
     <input type="text" name="first_name" placeholder="First Name"
-    id="first-name" required>
+    id="first-name" value="<%= params[:first_name]%>" required>
     </label><br>
 
     <label for="last-name">Last Name:
     <input type="text" name="last_name" placeholder="Last Name"
-    id="last-name" required>
+    id="last-name" value="<%= params[:last_name] %>" required>
     </label><br>
   </fieldset><br>
 
   <fieldset>
     <legend>Adress</legend>
     <label for="street">Street:
-    <input type="text" name="street" placeholder="Street" id="street">
+    <input type="text" name="street" placeholder="Street" id="street"
+    value="<%= params[:street] %>">
     </label>
 
     <label for="number">Nr:
     <input type="text" name="number" placeholder="House/appartment number" 
-    id='number'></label><br>
+    id="number" value="<%= params[:number] %>"></label><br>
 
     <label for="zipcode">ZIP Code:
-    <input type="text" name="zipcode" placeholder="ZIP Code" id="zipcode">
+    <input type="text" name="zipcode" placeholder="ZIP Code" id="zipcode"
+    value="<%= params[:zipcode] %>">
     </label>
 
     <label for="city">City:
-    <input type="text" name="city" placeholder="City" id="city">
+    <input type="text" name="city" placeholder="City" id="city"
+    value="<%= params[:city] %>">
     </label><br>
 
     <label for="country">Country:
-    <input type="text" name="country" placeholder="Country" id="country">
+    <input type="text" name="country" placeholder="Country" id="country"
+    value="<%= params[:country] %>">
     </label>
   </fieldset><br>
 
@@ -41,12 +45,12 @@
     <legend>Contact info</legend>
     <label for="phone-number">Phone Number:
     <input type="phone" name="phone_number" placeholder="Phone Number" 
-    id="phone-number">
+    id="phone-number" value="<%= params[:phone_number] %>">
     </label><br>
 
     <label for="mail-adress">Mail Adress:
     <input type="email" name="mail_adress" placeholder="Mail adress" 
-    id="mail-adress">
+    id="mail-adress" value="<%= params[:mail_adress] %>">
     </label>
   </fieldset><br>
 
@@ -54,14 +58,15 @@
     <legend>Birthdate</legend>
     <label for="birthdate">Date of birth:
     <input type="date" name="birthdate" placeholder="YYYY-MM-DD",
-    id="birthdate">
+    id="birthdate" value="<%= params[:birthdate] %>">
     </label>
   </fieldset><br>
 
   <fieldset>
     <legend>Category</legend>
     <label for="category">Category:
-    <input type="text" name="category" id="category">
+    <input type="text" name="category" id="category"
+    value="<%= params[:category] %>">
     </label>
   </fieldset><br>
 

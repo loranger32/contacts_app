@@ -110,3 +110,8 @@ Temporary Items
 
 # Rubocop
 .rubocop.yml
+
+# Users and contacts files
+users/
+data/
+

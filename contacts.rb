@@ -204,7 +204,7 @@ post '/contacts' do
   if errors.empty?
     formatted_contact_infos = format_contact_info(params)
     save_contact!(formatted_contact_infos)
-    session[:success] = "Contact has been saved: #{formatted_contact_infos}"
+    session[:success] = "Contact has been saved"
     redirect '/contacts'
   else
     status 422
