@@ -1,0 +1,25 @@
+---
+-
+ id: 1
+ first-name: Aplhonse
+ last-name: Daudet
+ street: Lavande
+ number: 555
+ zipcode: 1234
+ city: Happy City
+ country: webland
+ phone-number: 00369456963
+ mail-adress: ad@example.org
+ birthdate: 25-12-1901
+-
+ id: 2
+ first-name: René
+ last-name: Chiourme
+ street: Roses
+ number: 7
+ zipcode: 9999
+ city: Los Ponchos
+ country: webland
+ phone-number: 3963142256
+ mail-adress: rc@example.org
+ birthdate: 25-12-1902

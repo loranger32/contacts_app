@@ -1,0 +1,16 @@
+<% if session[:errors] %>
+<div class="flash-message error">
+  <ul>
+    <% display_error_messages(session[:errors]) do |error| %>
+    <li><%= error %></li>
+    <% end %>
+  </ul>
+</div>
+  <% session.delete(:errors) %>
+<% elsif session[:success] %>
+<div class="flash-message success">
+  <%= session.delete(:success) %>
+</div>
+<% session.delete(:success) %>
+<% end %>
+

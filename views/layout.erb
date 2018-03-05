@@ -10,15 +10,7 @@
 
   <body>
     <header>
-      <% if session[:error] %>
-      <div class="flash-message error">
-        <%= session.delete(:error) %>
-      </div>
-      <% elsif session[:success]%>
-      <div class="flash-message success">
-        <%= session.delete(:success) %>
-      </div>
-      <% end %>
+      <%== erb :flash_messages %>
 
       <h1 id="main-title">Training Contacts App</h1>
       <h2 id="main-subtitle">A training app for the 

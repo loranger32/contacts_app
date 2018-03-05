@@ -1,0 +1,19 @@
+<section class="index-section">
+  <p class="what-action"><b>Users list</b></p>
+  <ul class="users-list">
+    <% @users.keys.each do |username| %>
+      <li><%= username %>
+        <form action="/users/delete" method="post" class="inline">
+          <input type="submit" value="Delete User">
+        </form>
+      </li>
+    <% end %>
+  </ul>
+</section>
+
+<nav class="users-list">
+  <a href="/">Back to main page</a>
+</nav>
+
+
+
