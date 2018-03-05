@@ -1,5 +1,5 @@
 ---
-- next_id: 5
+- next_id: 7
 - id: 1
   first-name: Aplhonse
   last-name: Daudet
@@ -14,6 +14,30 @@
 - :id: 4
   first_name: Lolo
   last_name: Tim
+  street: ''
+  number: ''
+  zipcode: ''
+  city: ''
+  country: ''
+  phone_number: ''
+  mail_adress: ''
+  birthdate: ''
+  category: ''
+- :id: 5
+  first_name: Roger
+  last_name: Peso
+  street: ''
+  number: ''
+  zipcode: ''
+  city: ''
+  country: ''
+  phone_number: ''
+  mail_adress: ''
+  birthdate: ''
+  category: ''
+- :id: 6
+  first_name: Blob
+  last_name: Blub
   street: ''
   number: ''
   zipcode: ''
