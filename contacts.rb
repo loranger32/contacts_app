@@ -162,9 +162,9 @@ def format_contact_info(params)
   params.delete(:captures)
   infos = params.transform_values(&:strip)
   
-  [infos[:first_name], infos[:last_name], infos[:street], infos[:city],
-   infos[:country]].each { |info| info.capitalize! if info }
-  
+  [infos['first_name'], infos['last_name'], infos['street'], infos['city'],
+   infos['country']].each { |info| info.capitalize! }
+
   infos
 end
 
