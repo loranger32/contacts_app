@@ -36,14 +36,43 @@ end
 
 ######### Route Helpers ####################
 
+######### Access and permissions controls
+
+def redirect_non_admin_user_to(route)
+  unless session[:username] == 'admin'
+    session[:errors] = "Action only allowed to admin users"
+    redirect route
+  end
+end
+
+def redirect_logged_out_users_to(route)
+  unless session[:username]
+    session[:errors] = "You must be signed in to do that"
+    redirect(route)
+  end
+end
+
+######### File paths
+
 def users_path
   File.expand_path('../users/users.yaml', __FILE__)
+end
+
+def contacts_path
+  File.expand_path('../data/contacts.yaml', __FILE__)
 end
 
 def load_users_from(users_path)
   YAML.load_file(users_path)
 end
 
+def load_contacts_form(contacts_path)
+  YAML.load_file(contacts_path)
+end
+
+########## Validations
+
+# User validations
 def errors_in_signup_credentials(username, password, password_confirmation)
   errors = []
   errors << errors_in_user_name(username)
@@ -76,30 +105,74 @@ def save_user!(username, password)
   end
 end
 
-def redirect_non_admin_user_to(route)
-  unless session[:username] == 'admin'
-    session[:errors] = "Action only allowed to admin users"
-    redirect route
-  end
-end
-
-def redirect_logged_out_users_to(route)
-  unless session[:username]
-    session[:errors] = "You must be signed in to do that"
-    redirect(route)
-  end
-end
-
 def valid_credentials?(username, password)
   users = YAML.load_file(users_path)
   users[username] && BCrypt::Password.new(users[username]) == password
 end
 
+# Contacts validations
 def errors_in_contact_infos(params)
   errors = []
   errors << errors_in_name(params[:first_name], params[:last_name])
   errors << errors_in_adress(params[:street], params[:number], params[:zipcode],
-                             params[:country])
+                             params[:city], params[:country])
+  errors << errors_in_mail_or_phone(params[:phone_number], params[:mail_adress])
+  errors << errors_in_birthdate(params[:birthdate])
+  errors.flatten
+end
+
+def errors_in_name(first_name, last_name)
+  errors = []
+  errors << "First name can't be blank" if first_name.strip.empty?
+  errors << "Last name can't be blank" if last_name.strip.empty?
+  errors << "Name cannot include numbers" if [first_name, last_name].any? do |n|
+    n.match?(/\d+/)
+  end
+  errors << "Name is too long (max 30)" if [first_name, last_name].any? do |n|
+    n.size > 30
+  end
+  errors
+end
+
+def errors_in_adress(street, number, zip, city, country)
+  errors = []
+  errors << "City name cannot include numbers" if city.match?(/\d+/)
+  errors << "Country name cannot inlcude numbers" if country.match?(/\d+/)
+  errors << "City name is too long (max 40)" if city.size > 40
+  errors << "Country name is too long (max 40)" if country.size > 40
+  errors
+end
+
+def errors_in_mail_or_phone(phone, mail)
+  errors = []
+  errors << "Phone number can only have numbers" if phone.match?(/[a-zA-Z]+/)
+  errors << "Invalid mail adress" unless valid_mail_adress?(mail) || mail.empty?
+  errors
+end
+
+def errors_in_birthdate(birthdate)
+  []
+end
+
+def valid_mail_adress?(mail)
+  mail.match?(/\A\w+(\.?\w+?)*@\w+\.\w{2,4}\z/)
+end
+
+def format_contact_info(params)
+  params.delete(:captures)
+  infos = params.transform_values(&:strip)
+  
+  [infos[:first_name], infos[:last_name], infos[:street], infos[:city],
+   infos[:country]].each { |info| info.capitalize! if info }
+  
+  infos
+end
+
+def save_contact!(formatted_contact_infos)
+  contacts = load_contacts_form(contacts_path)
+  contacts << { id: contacts[0]["next_id"] }.merge(formatted_contact_infos)
+  contacts[0]["next_id"] += 1
+  File.open(contacts_path, 'w') { |f| f.write YAML.dump(contacts) }
 end
 
 ######### Routes ###########################
@@ -129,8 +202,9 @@ post '/contacts' do
 
   errors = errors_in_contact_infos(params)
   if errors.empty?
-    save_contact!(params)
-    session[:success] = "Contact has been saved"
+    formatted_contact_infos = format_contact_info(params)
+    save_contact!(formatted_contact_infos)
+    session[:success] = "Contact has been saved: #{formatted_contact_infos}"
     redirect '/contacts'
   else
     status 422

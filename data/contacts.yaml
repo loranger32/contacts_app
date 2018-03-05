@@ -1,25 +1,48 @@
 ---
--
- id: 1
- first-name: Aplhonse
- last-name: Daudet
- street: Lavande
- number: 555
- zipcode: 1234
- city: Happy City
- country: webland
- phone-number: 00369456963
- mail-adress: ad@example.org
- birthdate: 25-12-1901
--
- id: 2
- first-name: René
- last-name: Chiourme
- street: Roses
- number: 7
- zipcode: 9999
- city: Los Ponchos
- country: webland
- phone-number: 3963142256
- mail-adress: rc@example.org
- birthdate: 25-12-1902
+- next_id: 5
+- id: 1
+  first-name: Aplhonse
+  last-name: Daudet
+  street: Lavande
+  number: 555
+  zipcode: 1234
+  city: Happy City
+  country: webland
+  phone-number: '00369456963'
+  mail-adress: ad@example.org
+  birthdate: 25-12-1901
+- id: 2
+  first-name: René
+  last-name: Chiourme
+  street: Roses
+  number: 7
+  zipcode: 9999
+  city: Los Ponchos
+  country: webland
+  phone-number: 3963142256
+  mail-adress: rc@example.org
+  birthdate: 25-12-1902
+- :id: 3
+  first_name: Roger
+  last_name: Thiel
+  street: ''
+  number: ''
+  zipcode: ''
+  city: ''
+  country: ''
+  phone_number: ''
+  mail_adress: ''
+  birthdate: ''
+  category: ''
+- :id: 4
+  first_name: Bernard
+  last_name: comte
+  street: rue du chalet
+  number: '26'
+  zipcode: '2569'
+  city: Rabon
+  country: webland
+  phone_number: 123 456 7899
+  mail_adress: bc@example.com
+  birthdate: ''
+  category: ''
