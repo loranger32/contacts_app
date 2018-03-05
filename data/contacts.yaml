@@ -1,5 +1,5 @@
 ---
-- next_id: 4
+- next_id: 5
 - id: 1
   first-name: Aplhonse
   last-name: Daudet
@@ -11,3 +11,15 @@
   phone-number: '00369456963'
   mail-adress: ad@example.org
   birthdate: 25-12-1901
+- :id: 4
+  first_name: Lolo
+  last_name: Tim
+  street: ''
+  number: ''
+  zipcode: ''
+  city: ''
+  country: ''
+  phone_number: ''
+  mail_adress: ''
+  birthdate: ''
+  category: ''
