@@ -11,27 +11,3 @@
   phone-number: '00369456963'
   mail-adress: ad@example.org
   birthdate: 25-12-1901
-- :id: 2
-  first_name: Tom
-  last_name: Alder
-  street: ''
-  number: ''
-  zipcode: ''
-  city: ''
-  country: ''
-  phone_number: ''
-  mail_adress: ''
-  birthdate: ''
-  category: ''
-- :id: 3
-  first_name: Bram
-  last_name: Oriaki
-  street: ''
-  number: ''
-  zipcode: ''
-  city: ''
-  country: ''
-  phone_number: ''
-  mail_adress: ''
-  birthdate: ''
-  category: ''
