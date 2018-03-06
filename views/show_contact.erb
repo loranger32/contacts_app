@@ -1,21 +1,21 @@
 <section class="index-section">
   <p class="what-action"><b>Contact Infos</b></p>
   <ul class="users-list">
-    <li>First name: <%= @contact['first_name'] %></li>
-    <li>Last name: <%= @contact['last_name'] %></li>
-    <li>Street: <%= @contact['street'] || '/' %></li>
-    <li>Number: <%= @contact['number'] || '/' %></li>
-    <li>Zipcode: <%= @contact['zipcode'] || '/' %></li>
-    <li>City: <%= @contact['city'] || '/' %></li>
-    <li>Country: <%= @contact['country'] || '/' %></li>
-    <li>Phone number: <%= @contact['phone_number'] || '/'  %></li>
-    <li>Mail adress: <%= @contact['mail_adress'] || '/' %></li>
-    <li>Birthdate: <%= @contact['birthdate'] || '/' %></li>
-    <li>Category: <%= @contact['category'] || '/' %></li>
+    <li>First name: <%= @contact[:first_name] %></li>
+    <li>Last name: <%= @contact[:last_name] %></li>
+    <li>Street: <%= info_or_slash(@contact[:street])%></li>
+    <li>Number: <%= info_or_slash(@contact[:number])%></li>
+    <li>Zipcode: <%= info_or_slash(@contact[:zipcode])%></li>
+    <li>City: <%= info_or_slash(@contact[:city])%></li>
+    <li>Country: <%= info_or_slash(@contact[:country])%></li>
+    <li>Phone number: <%= info_or_slash(@contact[:phone_number] )%></li>
+    <li>Mail adress: <%= info_or_slash(@contact[:mail_adress])%></li>
+    <li>Birthdate: <%= info_or_slash(@contact[:birthdate])%></li>
+    <li>Category: <%= info_or_slash(@contact[:category])%></li>
   </ul>
 </section>
 
 <nav class="users-list">
   <a href="/contacts/:id/edit">Edit contact</a>
-  <a href="/">Back to main page</a>
+  <a href="/contacts">Back to contacts</a>
 </nav>

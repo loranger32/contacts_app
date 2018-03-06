@@ -32,6 +32,10 @@ helpers do
       yield(content)
     end
   end
+
+  def info_or_slash(info)
+    info.empty? ? '/' : info
+  end
 end
 
 ######### Route Helpers ####################
@@ -76,7 +80,7 @@ end
 
 def load_sorted_contacts(contacts_path)
   load_contacts_form(contacts_path)[1..-1].sort_by do |contact| 
-    contact['last_name']
+    contact[:last_name]
   end
 end
 
@@ -170,24 +174,24 @@ end
 
 def format_contact_info(params)
   params.delete(:captures)
-  infos = params.transform_values(&:strip)
+  infos = params.transform_values(&:strip).transform_keys(&:to_sym)
   
-  [infos['first_name'], infos['last_name'], infos['street'], infos['city'],
-   infos['country']].each { |info| info.capitalize! }
+  [infos[:first_name], infos[:last_name], infos[:street], infos[:city],
+   infos[:country]].each { |info| info.capitalize! }
 
   infos
 end
 
 def save_contact!(formatted_contact_infos)
   contacts = load_contacts_form(contacts_path)
-  contacts << { id: contacts[0]["next_id"] }.merge(formatted_contact_infos)
-  contacts[0]["next_id"] += 1
+  contacts << { id: contacts[0][:next_id] }.merge(formatted_contact_infos)
+  contacts[0][:next_id] += 1
   File.open(contacts_path, 'w') { |f| f.write YAML.dump(contacts) }
 end
 
 def find_contact_by(id)
   contacts = load_contacts_form(contacts_path)[1..-1]
-  contacts.find { |contact| contact['id'] == id }
+  contacts.find { |contact| contact[:id] == id }
 end
 
 ######### Routes ###########################

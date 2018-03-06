@@ -3,10 +3,10 @@
   <ul class="users-list">
     <% @contacts.each do |contact| %>
       <li>
-        <a href="/contacts/<%= contact['id'] %>">
-          <%= contact['last_name'] + ' ' + contact['first_name'] %>
+        <a href="/contacts/<%= contact[:id] %>">
+          <%= contact[:last_name] + ' ' + contact[:first_name] %>
         </a> |
-        <a href="/contacts/<%= contact['id'] %>/edit">Edit Contact</a> |
+        <a href="/contacts/<%= contact[:id] %>/edit">Edit Contact</a> |
         <form action="/contacts/delete" method="post" class="inline">
           <input type="submit" value="Delete Contact">
         </form>
