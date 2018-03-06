@@ -74,12 +74,12 @@ def load_sorted_users_form(users_path)
   load_users_from(users_path).sort_by { |name, _| name }
 end
 
-def load_contacts_form(contacts_path)
+def load_contacts_from(contacts_path)
   YAML.load_file(contacts_path)
 end
 
 def load_sorted_contacts(contacts_path)
-  load_contacts_form(contacts_path)[1..-1].sort_by do |contact| 
+  load_contacts_from(contacts_path)[1..-1].sort_by do |contact| 
     contact[:last_name]
   end
 end
@@ -108,15 +108,6 @@ def errors_in_user_name(username)
   errors << "Username can't be blank." if username.empty?
   errors << "Username already taken." if users.keys.include?(username)
   errors
-end
-
-def save_user!(username, password)
-  users = load_users_from(users_path)
-  hashed_password = BCrypt::Password.create(password)
-  users[@username] = hashed_password.to_s
-  File.open(users_path, 'w') do |f| 
-    f.write YAML.dump(users)
-  end
 end
 
 def valid_credentials?(username, password)
@@ -172,6 +163,17 @@ def valid_mail_adress?(mail)
   mail.match?(/\A\w+(\.?\w+?)*@\w+\.\w{2,4}\z/)
 end
 
+########## Storing actions
+
+def save_user!(username, password)
+  users = load_users_from(users_path)
+  hashed_password = BCrypt::Password.create(password)
+  users[@username] = hashed_password.to_s
+  File.open(users_path, 'w') do |f| 
+    f.write YAML.dump(users)
+  end
+end
+
 def format_contact_info(params)
   params.delete(:captures)
   infos = params.transform_values(&:strip).transform_keys(&:to_sym)
@@ -183,15 +185,22 @@ def format_contact_info(params)
 end
 
 def save_contact!(formatted_contact_infos)
-  contacts = load_contacts_form(contacts_path)
+  contacts = load_contacts_from(contacts_path)
   contacts << { id: contacts[0][:next_id] }.merge(formatted_contact_infos)
   contacts[0][:next_id] += 1
   File.open(contacts_path, 'w') { |f| f.write YAML.dump(contacts) }
 end
 
 def find_contact_by(id)
-  contacts = load_contacts_form(contacts_path)[1..-1]
+  contacts = load_contacts_from(contacts_path)[1..-1]
   contacts.find { |contact| contact[:id] == id }
+end
+
+def update_contact!(updated_contact)
+  id = updated_contact[:id] + 1
+  contacts = load_contacts_from(contacts_path)
+  contacts[id] = updated_contact
+  File.open(contacts_path, 'w') { |f| f.write YAML.dump(contacts) }
 end
 
 ######### Routes ###########################
@@ -236,9 +245,34 @@ end
 # Display a contact's infos
 get '/contacts/:id' do
   id = params[:id].to_i
-  @contact = find_contact_by(id) || "blob"
+  @contact = find_contact_by(id)
+  if @contact
+    erb :show_contact, layout: :layout
+  else
+    session[:errors] = "There is no such contact"
+    redirect '/contacts'
+  end
+end
 
-  erb :show_contact, layout: :layout
+# Page to edit a contact
+get '/contacts/:id/edit' do
+  id = params[:id].to_i
+  @contact = find_contact_by(id)
+  if @contact
+    erb :edit_contact, layout: :layout
+  else
+    session[:errors] = "There is no such contact"
+    redirect '/contacts'
+  end
+end
+
+# Update a contact
+post '/contacts/:id/update' do
+  id = params[:id].to_i
+  @contact = find_contact_by(id)
+  update_contact!(@contact)
+  session[:success] = "Contact has been updated"
+  redirect "/contacts/#{id}"
 end
 
 ########## Categories

@@ -1,0 +1,76 @@
+<h3 class="what-action index-section">Edit Contact</h3>
+
+<form action="/contacts/<%= @contact[:id] %>/update" 
+    class="contact-input-fields" method="post">
+  <fieldset>
+    <legend>Name</legend>
+    <label for="first-name" >First Name:
+    <input type="text" name="first_name" placeholder="First Name"
+    id="first-name" value="<%= @contact[:first_name]%>" required autofocus>
+    </label><br>
+
+    <label for="last-name">Last Name:
+    <input type="text" name="last_name" placeholder="Last Name"
+    id="last-name" value="<%= @contact[:last_name] %>" required>
+    </label><br>
+  </fieldset><br>
+
+  <fieldset>
+    <legend>Adress</legend>
+    <label for="street">Street:
+    <input type="text" name="street" placeholder="Street" id="street"
+    value="<%= @contact[:street] %>">
+    </label>
+
+    <label for="number">Nr:
+    <input type="text" name="number" placeholder="House/appartment number" 
+    id="number" value="<%= @contact[:number] %>"></label><br>
+
+    <label for="zipcode">ZIP Code:
+    <input type="text" name="zipcode" placeholder="ZIP Code" id="zipcode"
+    value="<%= @contact[:zipcode] %>">
+    </label>
+
+    <label for="city">City:
+    <input type="text" name="city" placeholder="City" id="city"
+    value="<%= @contact[:city] %>">
+    </label><br>
+
+    <label for="country">Country:
+    <input type="text" name="country" placeholder="Country" id="country"
+    value="<%= @contact[:country] %>">
+    </label>
+  </fieldset><br>
+
+  <fieldset>
+    <legend>Contact info</legend>
+    <label for="phone-number">Phone Number:
+    <input type="phone" name="phone_number" placeholder="Phone Number" 
+    id="phone-number" value="<%= @contact[:phone_number] %>">
+    </label><br>
+
+    <label for="mail-adress">Mail Adress:
+    <input type="email" name="mail_adress" placeholder="Mail adress" 
+    id="mail-adress" value="<%= @contact[:mail_adress] %>">
+    </label>
+  </fieldset><br>
+
+  <fieldset>
+    <legend>Birthdate</legend>
+    <label for="birthdate">Date of birth:
+    <input type="date" name="birthdate" placeholder="YYYY-MM-DD",
+    id="birthdate" value="<%= @contact[:birthdate] %>">
+    </label>
+  </fieldset><br>
+
+  <fieldset>
+    <legend>Category</legend>
+    <label for="category">Category:
+    <input type="text" name="category" id="category"
+    value="<%= @contact[:category] %>">
+    </label>
+  </fieldset><br>
+
+  <input type="submit" value="Edit contact" id="save-button">
+  <a href="/">Cancel</a>
+</form>
