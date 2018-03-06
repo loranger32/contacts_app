@@ -66,8 +66,18 @@ def load_users_from(users_path)
   YAML.load_file(users_path)
 end
 
+def load_sorted_users_form(users_path)
+  load_users_from(users_path).sort_by { |name, _| name }
+end
+
 def load_contacts_form(contacts_path)
   YAML.load_file(contacts_path)
+end
+
+def load_sorted_contacts(contacts_path)
+  load_contacts_form(contacts_path)[1..-1].sort_by do |contact| 
+    contact['last_name']
+  end
 end
 
 ########## Validations
@@ -175,6 +185,11 @@ def save_contact!(formatted_contact_infos)
   File.open(contacts_path, 'w') { |f| f.write YAML.dump(contacts) }
 end
 
+def find_contact_by(id)
+  contacts = load_contacts_form(contacts_path)[1..-1]
+  contacts.find { |contact| contact['id'] == id }
+end
+
 ######### Routes ###########################
 
 # Home page
@@ -187,6 +202,7 @@ end
 # Display all contacts
 get '/contacts' do
   redirect_logged_out_users_to('/')
+  @contacts = load_sorted_contacts(contacts_path)
 
   erb :contacts, layout: :layout
 end
@@ -211,6 +227,14 @@ post '/contacts' do
     session[:errors] = errors
     erb :new_contact
   end
+end
+
+# Display a contact's infos
+get '/contacts/:id' do
+  id = params[:id].to_i
+  @contact = find_contact_by(id) || "blob"
+
+  erb :show_contact, layout: :layout
 end
 
 ########## Categories

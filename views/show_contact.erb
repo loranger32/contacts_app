@@ -1,0 +1,21 @@
+<section class="index-section">
+  <p class="what-action"><b>Contact Infos</b></p>
+  <ul class="users-list">
+    <li>First name: <%= @contact['first_name'] %></li>
+    <li>Last name: <%= @contact['last_name'] %></li>
+    <li>Street: <%= @contact['street'] || '/' %></li>
+    <li>Number: <%= @contact['number'] || '/' %></li>
+    <li>Zipcode: <%= @contact['zipcode'] || '/' %></li>
+    <li>City: <%= @contact['city'] || '/' %></li>
+    <li>Country: <%= @contact['country'] || '/' %></li>
+    <li>Phone number: <%= @contact['phone_number'] || '/'  %></li>
+    <li>Mail adress: <%= @contact['mail_adress'] || '/' %></li>
+    <li>Birthdate: <%= @contact['birthdate'] || '/' %></li>
+    <li>Category: <%= @contact['category'] || '/' %></li>
+  </ul>
+</section>
+
+<nav class="users-list">
+  <a href="/contacts/:id/edit">Edit contact</a>
+  <a href="/">Back to main page</a>
+</nav>

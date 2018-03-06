@@ -1,17 +1,17 @@
 ---
-- next_id: 7
+- next_id: 8
 - id: 1
-  first-name: Aplhonse
-  last-name: Daudet
+  first_name: Aplhonse
+  last_name: Daudet
   street: Lavande
   number: 555
   zipcode: 1234
   city: Happy City
   country: webland
-  phone-number: '00369456963'
-  mail-adress: ad@example.org
+  phone_number: '00369456963'
+  mail_adress: ad@example.org
   birthdate: 25-12-1901
-- :id: 4
+- id: 4
   first_name: Lolo
   last_name: Tim
   street: ''
@@ -23,7 +23,7 @@
   mail_adress: ''
   birthdate: ''
   category: ''
-- :id: 5
+- id: 5
   first_name: Roger
   last_name: Peso
   street: ''
@@ -35,9 +35,21 @@
   mail_adress: ''
   birthdate: ''
   category: ''
-- :id: 6
+- id: 6
   first_name: Blob
   last_name: Blub
+  street: ''
+  number: ''
+  zipcode: ''
+  city: ''
+  country: ''
+  phone_number: ''
+  mail_adress: ''
+  birthdate: ''
+  category: ''
+- :id: 7
+  first_name: My test
+  last_name: On the fly
   street: ''
   number: ''
   zipcode: ''
