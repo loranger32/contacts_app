@@ -71,26 +71,33 @@ def next_id_path
   File.expand_path('../data/next_contact_index.yaml', __FILE__)
 end
 
-def load_users_from(users_path)
+def load_users
   YAML.load_file(users_path)
 end
 
-def load_sorted_users_form(users_path)
-  load_users_from(users_path).sort_by { |name, _| name }
+def load_sorted_users
+  load_users.sort_by { |name, _| name }
 end
 
-def load_contacts_from(contacts_path)
+def load_contacts
   YAML.load_file(contacts_path)
 end
 
-def load_sorted_contacts(contacts_path)
-  load_contacts_from(contacts_path).sort_by do |contact| 
-    contact[:last_name]
-  end
+def load_sorted_contacts
+  contacts = load_contacts
+  contacts.sort_by { |contact| contact[:last_name] }
 end
 
-def next_id(next_id_path)
+def next_id
   YAML.load_file(next_id_path)[:next_id]
+end
+
+def categories_path
+  File.expand_path('../data/categories.yaml', __FILE__)
+end
+
+def load_categories
+  YAML.load_file(categories_path)
 end
 
 ########## Validations
@@ -175,7 +182,7 @@ end
 ########## Storing actions
 
 def save_user!(username, password)
-  users = load_users_from(users_path)
+  users = load_users
   hashed_password = BCrypt::Password.create(password)
   users[@username] = hashed_password.to_s
   File.open(users_path, 'w') do |f| 
@@ -194,8 +201,8 @@ def format_contact_info(params)
 end
 
 def save_contact!(formatted_contact_infos)
-  contacts = load_contacts_from(contacts_path)
-  id = next_id(next_id_path)
+  contacts = load_contacts
+  id = next_id
   contacts << { id: id }.merge(formatted_contact_infos)
   File.open(contacts_path, 'w') { |f| f.write YAML.dump(contacts) }
   increment_contact_id(id, next_id_path)
@@ -207,12 +214,12 @@ def increment_contact_id(id, next_id_path)
 end
 
 def find_contact_by(id)
-  contacts = load_contacts_from(contacts_path)
+  contacts = load_contacts
   contacts.find { |contact| contact[:id] == id }
 end
 
 def update_contact!(updated_contact, id)
-  contacts = load_contacts_from(contacts_path)
+  contacts = load_contacts
   contact = find_contact_by(id)
   index_in_contacts_array = contacts.index(contact)
   contacts[index_in_contacts_array] = { id: id }.merge(updated_contact)
@@ -220,7 +227,7 @@ def update_contact!(updated_contact, id)
 end
 
 def delete_contact_with_id!(id)
-  contacts = load_contacts_from(contacts_path)
+  contacts = load_contacts
   contact = find_contact_by(id)
   contacts.delete(contact)
   File.open(contacts_path, 'w') { |f| f.write YAML.dump(contacts) }
@@ -238,7 +245,7 @@ end
 # Display all contacts
 get '/contacts' do
   redirect_logged_out_users_to('/')
-  @contacts = load_sorted_contacts(contacts_path)
+  @contacts = load_sorted_contacts
 
   erb :contacts, layout: :layout
 end
@@ -409,5 +416,3 @@ not_found do
   session[:errors] = "The page you requested does not exists."
   redirect '/'
 end
-
-

@@ -1,6 +1,6 @@
 ---
 - :id: 2
-  :first_name: René
+  :first_name: René blob
   :last_name: Lucette
   :street: Avenue de broqueville
   :number: ''
@@ -9,5 +9,29 @@
   :country: Blob
   :phone_number: '123456789'
   :mail_adress: sdsdds@dmf.lo
+  :birthdate: ''
+  :category: ''
+- :id: 2
+  :first_name: Roger
+  :last_name: Birman
+  :street: ''
+  :number: ''
+  :zipcode: ''
+  :city: ''
+  :country: ''
+  :phone_number: ''
+  :mail_adress: ''
+  :birthdate: ''
+  :category: ''
+- :id: 3
+  :first_name: Tom
+  :last_name: Crassu
+  :street: ''
+  :number: ''
+  :zipcode: ''
+  :city: ''
+  :country: ''
+  :phone_number: ''
+  :mail_adress: ''
   :birthdate: ''
   :category: ''
