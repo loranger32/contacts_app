@@ -1,7 +1,7 @@
 ---
 - :id: 2
   :first_name: René
-  :last_name: Luce
+  :last_name: Lucette
   :street: Avenue de broqueville
   :number: ''
   :zipcode: '1210'
@@ -10,16 +10,4 @@
   :phone_number: '123456789'
   :mail_adress: sdsdds@dmf.lo
   :birthdate: ''
-  :category: ''
-- :id: 7
-  :first_name: Roger
-  :last_name: Tallermin
-  :street: Horizonstraat
-  :number: '25'
-  :zipcode: '9875'
-  :city: Blobdijk
-  :country: Webland
-  :phone_number: '99999987'
-  :mail_adress: r.t@example.org
-  :birthdate: '2002-06-12'
   :category: ''

@@ -1,3 +1,3 @@
-require_relative 'contacts'
+require './contacts.rb'
 
 run Sinatra::Application
