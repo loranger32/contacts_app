@@ -1,5 +1,4 @@
 ---
-- :next_id: 6
 - :id: 1
   :first_name: Aplhonse
   :last_name: Daudet
@@ -12,9 +11,9 @@
   :mail_adress: ad@example.org
   :birthdate: 25-12-1901
   :category: ''
-- :id: 4
-  :first_name: Test
-  :last_name: Again
+- :id: 2
+  :first_name: René
+  :last_name: Luce
   :street: ''
   :number: ''
   :zipcode: ''
@@ -24,29 +23,27 @@
   :mail_adress: ''
   :birthdate: ''
   :category: ''
-- :id: 5
-  :first_name: Roger
-  :last_name: Abslou
-  :street: Rue du couvent
-  :number: '22'
-  :zipcode: '1234'
-  :city: Happycity
-  :country: Webland
-  :phone_number: '123456789'
-  :mail_adress: r.a@example.com
-  :birthdate: '2018-03-07'
-  :category: friend
-- 
-- 
-- :id: 5
-  :first_name: Roger
-  :last_name: Abslou
-  :street: Rue du couvent
-  :number: '22'
-  :zipcode: '1234'
-  :city: Happycity
-  :country: Webland
-  :phone_number: '123456789'
-  :mail_adress: r.a@example.com
-  :birthdate: '2018-03-07'
-  :category: friend
+- :id: 3
+  :first_name: Gulven
+  :last_name: Trucjmam
+  :street: ''
+  :number: ''
+  :zipcode: ''
+  :city: ''
+  :country: ''
+  :phone_number: ''
+  :mail_adress: ''
+  :birthdate: ''
+  :category: ''
+- :id: 4
+  :first_name: Fdhqjdkfh
+  :last_name: Sqdsqdqsdqsdqsdqsd
+  :street: ''
+  :number: ''
+  :zipcode: ''
+  :city: ''
+  :country: ''
+  :phone_number: ''
+  :mail_adress: ''
+  :birthdate: ''
+  :category: ''

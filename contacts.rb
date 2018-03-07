@@ -66,6 +66,10 @@ def contacts_path
   File.expand_path('../data/contacts.yaml', __FILE__)
 end
 
+def next_id_path
+  File.expand_path('../data/next_contact_index.yaml', __FILE__)
+end
+
 def load_users_from(users_path)
   YAML.load_file(users_path)
 end
@@ -79,9 +83,13 @@ def load_contacts_from(contacts_path)
 end
 
 def load_sorted_contacts(contacts_path)
-  load_contacts_from(contacts_path)[1..-1].sort_by do |contact| 
+  load_contacts_from(contacts_path).sort_by do |contact| 
     contact[:last_name]
   end
+end
+
+def next_id(next_id_path)
+  YAML.load_file(next_id_path)[:next_id]
 end
 
 ########## Validations
@@ -186,13 +194,19 @@ end
 
 def save_contact!(formatted_contact_infos)
   contacts = load_contacts_from(contacts_path)
-  contacts << { id: contacts[0][:next_id] }.merge(formatted_contact_infos)
-  contacts[0][:next_id] += 1
+  id = next_id(next_id_path)
+  contacts << { id: id }.merge(formatted_contact_infos)
   File.open(contacts_path, 'w') { |f| f.write YAML.dump(contacts) }
+  increment_contact_id(id, next_id_path)
+end
+
+def increment_contact_id(id, next_id_path)
+  id += 1 
+  File.open(next_id_path, 'w') { |f| f.write YAML.dump({ next_id: id }) }
 end
 
 def find_contact_by(id)
-  contacts = load_contacts_from(contacts_path)[1..-1]
+  contacts = load_contacts_from(contacts_path)
   contacts.find { |contact| contact[:id] == id }
 end
 
