@@ -1,16 +1,4 @@
 ---
-- :first_name: Aplhonse
-  :last_name: Marignan
-  :street: Lavande
-  :number: '555'
-  :zipcode: '1234'
-  :city: Happy city
-  :country: Webland
-  :phone_number: '00369456963'
-  :mail_adress: ad@example.org
-  :birthdate: ''
-  :category: ''
-  :id: 1
 - :id: 2
   :first_name: René
   :last_name: Luce
@@ -23,39 +11,15 @@
   :mail_adress: sdsdds@dmf.lo
   :birthdate: ''
   :category: ''
-- :id: 3
-  :first_name: Gulven
-  :last_name: Trucjmam
-  :street: Louvrex
-  :number: '81'
-  :zipcode: '4000'
-  :city: Liege
+- :id: 7
+  :first_name: Roger
+  :last_name: Tallermin
+  :street: Horizonstraat
+  :number: '25'
+  :zipcode: '9875'
+  :city: Blobdijk
   :country: Webland
-  :phone_number: ''
-  :mail_adress: ''
-  :birthdate: ''
-  :category: ''
-- :id: 5
-  :first_name: Laurent
-  :last_name: Trotop trocool
-  :street: ''
-  :number: ''
-  :zipcode: ''
-  :city: ''
-  :country: ''
-  :phone_number: ''
-  :mail_adress: ''
-  :birthdate: ''
-  :category: ''
-- :id: 6
-  :first_name: Sophie
-  :last_name: Bloomberge
-  :street: ''
-  :number: ''
-  :zipcode: ''
-  :city: ''
-  :country: ''
-  :phone_number: ''
-  :mail_adress: ''
-  :birthdate: ''
+  :phone_number: '99999987'
+  :mail_adress: r.t@example.org
+  :birthdate: '2002-06-12'
   :category: ''

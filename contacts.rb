@@ -219,6 +219,13 @@ def update_contact!(updated_contact, id)
   File.open(contacts_path, 'w') { |f| f.write YAML.dump(contacts) }
 end
 
+def delete_contact_with_id!(id)
+  contacts = load_contacts_from(contacts_path)
+  contact = find_contact_by(id)
+  contacts.delete(contact)
+  File.open(contacts_path, 'w') { |f| f.write YAML.dump(contacts) }
+end
+
 ######### Routes ###########################
 
 # Home page
@@ -299,6 +306,15 @@ post '/contacts/:contact_id' do
     session[:errors] = errors
     erb :new_contact
   end
+end
+
+# Delete a contact
+post '/contacts/:contact_id/delete' do
+  id = params[:contact_id].to_i
+  delete_contact_with_id!(id)
+
+  session[:success] = "Contact has been deleted"
+  redirect '/contacts'
 end
 
 ########## Categories

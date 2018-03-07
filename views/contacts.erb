@@ -7,7 +7,8 @@
           <%= contact[:last_name] + ' ' + contact[:first_name] %>
         </a> |
         <a href="/contacts/<%= contact[:id] %>/edit">Edit Contact</a> |
-        <form action="/contacts/delete" method="post" class="inline">
+        <form action="/contacts/<%= contact[:id] %>/delete" method="post"
+          class="inline">
           <input type="submit" value="Delete Contact">
         </form>
       </li>
@@ -16,5 +17,6 @@
 </section>
 
 <nav class="users-list">
-  <a href="/">Back to main page</a>
+  <a href="/">Back to main page</a>  |  
+  <a href="/contacts/new">Add new contact</a>
 </nav>
