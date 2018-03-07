@@ -9,6 +9,7 @@ gem 'erubis'
 
 group :development do
   gem 'thin'
+  gem 'pry'
 end
 
 group :production do

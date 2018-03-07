@@ -4,6 +4,7 @@ require 'sinatra/reloader' if development?
 require 'bcrypt'
 require 'yaml'
 require 'tilt/erubis'
+require 'pry'
 
 ######### Configuration ####################
 
@@ -211,9 +212,12 @@ def find_contact_by(id)
 end
 
 def update_contact!(updated_contact)
-  id = updated_contact[:id] + 1
+  id = updated_contact[:id]
   contacts = load_contacts_from(contacts_path)
-  contacts[id] = updated_contact
+  contact = find_contact_by(id)
+  index_in_contacts_array = contacts.index(contact)
+  contacts[index_in_contacts_array] = updated_contact
+  binding.pry
   File.open(contacts_path, 'w') { |f| f.write YAML.dump(contacts) }
 end
 
@@ -268,6 +272,9 @@ get '/contacts/:id' do
   end
 end
 
+#####################
+# TO BE FIXED
+####################
 # Page to edit a contact
 get '/contacts/:id/edit' do
   id = params[:id].to_i
