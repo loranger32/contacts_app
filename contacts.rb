@@ -283,7 +283,7 @@ get '/contacts/:id/edit' do
 end
 
 # Update a contact
-post '/contacts/:contact_id/update' do
+post '/contacts/:contact_id' do
   redirect_logged_out_users_to('/')
 
   id = params.delete(:contact_id).to_i
