@@ -211,13 +211,11 @@ def find_contact_by(id)
   contacts.find { |contact| contact[:id] == id }
 end
 
-def update_contact!(updated_contact)
-  id = updated_contact[:id]
+def update_contact!(updated_contact, id)
   contacts = load_contacts_from(contacts_path)
   contact = find_contact_by(id)
   index_in_contacts_array = contacts.index(contact)
-  contacts[index_in_contacts_array] = updated_contact
-  binding.pry
+  contacts[index_in_contacts_array] = { id: id }.merge(updated_contact)
   File.open(contacts_path, 'w') { |f| f.write YAML.dump(contacts) }
 end
 
@@ -272,9 +270,6 @@ get '/contacts/:id' do
   end
 end
 
-#####################
-# TO BE FIXED
-####################
 # Page to edit a contact
 get '/contacts/:id/edit' do
   id = params[:id].to_i
@@ -288,12 +283,22 @@ get '/contacts/:id/edit' do
 end
 
 # Update a contact
-post '/contacts/:id/update' do
-  id = params[:id].to_i
-  @contact = find_contact_by(id)
-  update_contact!(@contact)
-  session[:success] = "Contact has been updated"
-  redirect "/contacts/#{id}"
+post '/contacts/:contact_id/update' do
+  redirect_logged_out_users_to('/')
+
+  id = params.delete(:contact_id).to_i
+  
+  errors = errors_in_contact_infos(params)
+  if errors.empty?
+    formatted_contact_infos = format_contact_info(params)
+    update_contact!(formatted_contact_infos, id)
+    session[:success] = "Contact has been updated"
+    redirect "/contacts/#{id}"
+  else
+    status 422
+    session[:errors] = errors
+    erb :new_contact
+  end
 end
 
 ########## Categories
