@@ -245,6 +245,8 @@ end
 
 # Page for adding a new contact
 get '/contacts/new' do
+  redirect_logged_out_users_to('/')
+
   erb :new_contact, layout: :layout
 end
 
@@ -267,6 +269,8 @@ end
 
 # Display a contact's infos
 get '/contacts/:id' do
+  redirect_logged_out_users_to('/')
+
   id = params[:id].to_i
   @contact = find_contact_by(id)
   if @contact
@@ -279,6 +283,8 @@ end
 
 # Page to edit a contact
 get '/contacts/:id/edit' do
+  redirect_logged_out_users_to('/')
+
   id = params[:id].to_i
   @contact = find_contact_by(id)
   if @contact
@@ -294,7 +300,7 @@ post '/contacts/:contact_id' do
   redirect_logged_out_users_to('/')
 
   id = params.delete(:contact_id).to_i
-  
+
   errors = errors_in_contact_infos(params)
   if errors.empty?
     formatted_contact_infos = format_contact_info(params)
@@ -310,6 +316,8 @@ end
 
 # Delete a contact
 post '/contacts/:contact_id/delete' do
+  redirect_logged_out_users_to('/')
+
   id = params[:contact_id].to_i
   delete_contact_with_id!(id)
 
@@ -330,7 +338,7 @@ end
 
 # Display all Users (only for admin)
 get '/users' do
-  #redirect_non_admin_user_to('/')
+  redirect_non_admin_user_to('/')
   @users = YAML.load_file(users_path)
 
   erb :users
