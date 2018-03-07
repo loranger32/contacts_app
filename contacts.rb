@@ -4,7 +4,6 @@ require 'sinatra/reloader' if development?
 require 'bcrypt'
 require 'yaml'
 require 'tilt/erubis'
-require 'pry'
 
 ######### Configuration ####################
 
