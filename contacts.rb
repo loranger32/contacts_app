@@ -37,6 +37,10 @@ helpers do
   def info_or_slash(info)
     info.empty? ? '/' : info
   end
+
+  def category_link_or_slash(category)
+    category.empty? ? '/' : "<a href=\"/categories/#{category}\">#{category}</a>"
+  end
 end
 
 ######### Route Helpers ####################
@@ -191,6 +195,10 @@ def errors_in_category_name(new_category)
   errors
 end
 
+def check_category_of_contact_already_exists(category)
+  save_category!(category) unless category_exists?(category)
+end
+
 ########## Storing actions
 
 def save_user!(username, password)
@@ -251,6 +259,21 @@ def save_category!(new_category)
   File.open(categories_path, 'w') { |f| f.write YAML.dump(categories) }
 end
 
+def remove_category_from_contacts!(category)
+  contacts = load_contacts
+  contacts.each do |contact|
+    contact[:category] = '' if contact[:category] == category
+  end
+  File.open(contacts_path, 'w') { |f| f.write YAML.dump(contacts) }
+end
+
+######### Various helpers
+
+def category_exists?(category)
+  categories = load_categories
+  categories.include?(category)
+end
+
 ######### Routes ###########################
 
 # Home page
@@ -283,6 +306,7 @@ post '/contacts' do
   if errors.empty?
     formatted_contact_infos = format_contact_info(params)
     save_contact!(formatted_contact_infos)
+    check_category_of_contact_already_exists(formatted_contact_infos[:category])
     session[:success] = "Contact has been saved"
     redirect '/contacts'
   else
@@ -371,10 +395,14 @@ end
 get '/categories/:category_name' do
   redirect_logged_out_users_to('/')
 
-  @category = params[:category_name]
-  @contacts = load_contacts_by_category(@category)
-
-  erb :show_category, layout: :layout
+  if category_exists?(params[:category_name])
+    @category = params[:category_name]
+    @contacts = load_contacts_by_category(@category)
+    erb :show_category, layout: :layout
+  else
+    session[:errors] = "This category no longer exists."
+    redirect '/categories'
+  end
 end
 
 # Save a category
@@ -400,7 +428,11 @@ post '/categories/:category_name/delete' do
 
   categories = load_categories
   categories.delete(category)
+
   File.open(categories_path, 'w') { |f| f.write YAML.dump(categories) }
+
+  remove_category_from_contacts!(category)
+
   session[:success] = "Category has been deleted"
   redirect '/categories'
 end

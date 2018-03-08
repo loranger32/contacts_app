@@ -11,7 +11,7 @@
     <li>Phone number: <i><%= info_or_slash(@contact[:phone_number] )%></i></li>
     <li>Mail adress: <i><%= info_or_slash(@contact[:mail_adress])%></i></li>
     <li>Birthdate: <i><%= info_or_slash(@contact[:birthdate])%></i></li>
-    <li>Category: <i><%= info_or_slash(@contact[:category])%></i></li>
+    <li>Category: <i><%== category_link_or_slash(@contact[:category])%></i></li>
   </ul>
 </section>
 
