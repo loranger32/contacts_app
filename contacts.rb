@@ -100,6 +100,11 @@ def load_categories
   YAML.load_file(categories_path)
 end
 
+def load_contacts_by_category(category)
+  contacts = load_contacts
+  contacts.select { |contact| contact[:category] == category }
+end
+
 ########## Validations
 
 # User validations
@@ -334,12 +339,29 @@ end
 
 ########## Categories
 
-# Display categories
+# Display all categories
 get '/categories' do
   redirect_logged_out_users_to('/')
+  @categories = load_categories
 
   erb :categories, layout: :layout
 end
+
+# Display all contacts of a category
+get '/categories/:category_name' do
+  redirect_logged_out_users_to('/')
+  
+  @category = params[:category_name]
+  @contacts = load_contacts_by_category(@category)
+
+  erb :show_category, layout: :layout
+end
+
+# Add a category
+post '/categrories' do
+
+end
+
 
 ########## Users
 

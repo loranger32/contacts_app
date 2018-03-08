@@ -1,0 +1,23 @@
+<section class="index-section">
+  <p class="what-action"><b><%= @category %> contacts</b></p>
+  <ul class="users-list">
+    <% @contacts.each do |contact| %>
+      <li>
+        <a href="/contacts/<%= contact[:id] %>">
+          <%= contact[:last_name] + ' ' + contact[:first_name] %>
+        </a> |
+        <a href="/contacts/<%= contact[:id] %>/edit">Edit Contact</a> |
+        <form action="/contacts/<%= contact[:id] %>/delete" method="post"
+          class="inline">
+          <input type="submit" value="Delete Contact">
+        </form>
+      </li>
+    <% end %>
+  </ul>
+</section>
+
+<nav class="users-list">
+  <a href="/categories">Back to categories</a>  |  
+  <a href="/categories/new">Add a category</a>  |  
+  <a href="/contacts">Back to contacts list</a>
+</nav>

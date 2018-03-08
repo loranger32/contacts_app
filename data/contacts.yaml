@@ -10,7 +10,7 @@
   :phone_number: '123456789'
   :mail_adress: sdsdds@dmf.lo
   :birthdate: ''
-  :category: ''
+  :category: Friends
 - :id: 2
   :first_name: Roger
   :last_name: Birman
@@ -34,4 +34,28 @@
   :phone_number: ''
   :mail_adress: ''
   :birthdate: ''
-  :category: ''
+  :category: Work
+- :id: 4
+  :first_name: Keyina
+  :last_name: Mapyer
+  :street: ''
+  :number: ''
+  :zipcode: ''
+  :city: ''
+  :country: ''
+  :phone_number: ''
+  :mail_adress: ''
+  :birthdate: ''
+  :category: Friends
+- :id: 5
+  :first_name: Xavier
+  :last_name: Duglu
+  :street: ''
+  :number: ''
+  :zipcode: ''
+  :city: ''
+  :country: ''
+  :phone_number: ''
+  :mail_adress: ''
+  :birthdate: ''
+  :category: Family
