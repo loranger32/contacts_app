@@ -184,6 +184,13 @@ def valid_mail_adress?(mail)
   mail.match?(/\A\w+(\.?\w+?)*@\w+\.\w{2,4}\z/)
 end
 
+def errors_in_category_name(new_category)
+  errors = []
+  errors << "Catgeory cannot include numbers" if new_category.match?(/\d+/)
+  errors << "Catgeory name is too long (max 40)" if new_category.size > 40
+  errors
+end
+
 ########## Storing actions
 
 def save_user!(username, password)
@@ -200,7 +207,7 @@ def format_contact_info(params)
   infos = params.transform_values(&:strip).transform_keys(&:to_sym)
   
   [infos[:first_name], infos[:last_name], infos[:street], infos[:city],
-   infos[:country]].each { |info| info.capitalize! }
+   infos[:country], infos[:category]].each { |info| info.capitalize! }
 
   infos
 end
@@ -236,6 +243,12 @@ def delete_contact_with_id!(id)
   contact = find_contact_by(id)
   contacts.delete(contact)
   File.open(contacts_path, 'w') { |f| f.write YAML.dump(contacts) }
+end
+
+def save_category!(new_category)
+  categories = load_categories
+  categories << new_category.capitalize
+  File.open(categories_path, 'w') { |f| f.write YAML.dump(categories) }
 end
 
 ######### Routes ###########################
@@ -347,21 +360,50 @@ get '/categories' do
   erb :categories, layout: :layout
 end
 
+# Page to add a category
+get '/categories/new' do
+  redirect_logged_out_users_to('/')
+
+  erb :new_category, layout: :layout
+end
+
 # Display all contacts of a category
 get '/categories/:category_name' do
   redirect_logged_out_users_to('/')
-  
+
   @category = params[:category_name]
   @contacts = load_contacts_by_category(@category)
 
   erb :show_category, layout: :layout
 end
 
-# Add a category
-post '/categrories' do
+# Save a category
+post '/categories' do
+  redirect_logged_out_users_to('/')
 
+  new_category = params[:category]
+  errors = errors_in_category_name(new_category)
+  if errors.empty?
+    save_category!(new_category)
+    session[:success] = "Category has been saved"
+    redirect '/categories'
+  else
+    status 422
+    session[:errors] = errors
+    erb :new_category
+  end
 end
 
+# Delete a category
+post '/categories/:category_name/delete' do
+  category = params[:category_name]
+
+  categories = load_categories
+  categories.delete(category)
+  File.open(categories_path, 'w') { |f| f.write YAML.dump(categories) }
+  session[:success] = "Category has been deleted"
+  redirect '/categories'
+end
 
 ########## Users
 

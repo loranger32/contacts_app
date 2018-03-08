@@ -3,7 +3,11 @@
   <ul class="users-list">
     <% @categories.each do |category| %>
       <li>
-        <a href="/categories/<%= category %>"> <%= category %></a> 
+        <a href="/categories/<%= category %>"> <%= category %></a>
+        <form action="/categories/<%= category %>/delete" method="post"
+          class="inline">
+          <input type="submit" value="Delete category">
+        </form>
       </li>
     <% end %>
   </ul>
@@ -11,5 +15,5 @@
 
 <nav class="users-list">
   <a href="/">Back to main page</a>  |  
-  <a href="/contacts/new">Add category</a>
+  <a href="/categories/new">Add category</a>
 </nav>
