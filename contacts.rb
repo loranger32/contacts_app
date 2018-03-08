@@ -205,9 +205,7 @@ def save_user!(username, password)
   users = load_users
   hashed_password = BCrypt::Password.create(password)
   users[@username] = hashed_password.to_s
-  File.open(users_path, 'w') do |f| 
-    f.write YAML.dump(users)
-  end
+  save_to_file!(users_path, users)
 end
 
 def format_contact_info(params)
@@ -224,13 +222,13 @@ def save_contact!(formatted_contact_infos)
   contacts = load_contacts
   id = next_id
   contacts << { id: id }.merge(formatted_contact_infos)
-  File.open(contacts_path, 'w') { |f| f.write YAML.dump(contacts) }
+  save_to_file!(contacts_path, contacts)
   increment_contact_id(id, next_id_path)
 end
 
 def increment_contact_id(id, next_id_path)
   id += 1 
-  File.open(next_id_path, 'w') { |f| f.write YAML.dump({ next_id: id }) }
+  save_to_file!(next_id_path, { next_id: id })
 end
 
 def find_contact_by(id)
@@ -243,20 +241,20 @@ def update_contact!(updated_contact, id)
   contact = find_contact_by(id)
   index_in_contacts_array = contacts.index(contact)
   contacts[index_in_contacts_array] = { id: id }.merge(updated_contact)
-  File.open(contacts_path, 'w') { |f| f.write YAML.dump(contacts) }
+  save_to_file!(contacts_path, contacts)
 end
 
 def delete_contact_with_id!(id)
   contacts = load_contacts
   contact = find_contact_by(id)
   contacts.delete(contact)
-  File.open(contacts_path, 'w') { |f| f.write YAML.dump(contacts) }
+  save_to_file!(contacts_path, contacts)
 end
 
 def save_category!(new_category)
   categories = load_categories
   categories << new_category.capitalize
-  File.open(categories_path, 'w') { |f| f.write YAML.dump(categories) }
+  save_to_file!(categories_path, categories)
 end
 
 def remove_category_from_contacts!(category)
@@ -264,7 +262,7 @@ def remove_category_from_contacts!(category)
   contacts.each do |contact|
     contact[:category] = '' if contact[:category] == category
   end
-  File.open(contacts_path, 'w') { |f| f.write YAML.dump(contacts) }
+  save_to_file!(contacts_path, contacts)
 end
 
 ######### Various helpers
@@ -272,6 +270,10 @@ end
 def category_exists?(category)
   categories = load_categories
   categories.include?(category)
+end
+
+def save_to_file!(file_path, data)
+  File.open(file_path, 'w') { |f| f.write YAML.dump(data) }
 end
 
 ######### Routes ###########################
@@ -429,7 +431,7 @@ post '/categories/:category_name/delete' do
   categories = load_categories
   categories.delete(category)
 
-  File.open(categories_path, 'w') { |f| f.write YAML.dump(categories) }
+  save_to_file!(categories_path, categories)
 
   remove_category_from_contacts!(category)
 
