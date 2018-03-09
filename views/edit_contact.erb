@@ -66,9 +66,17 @@
   <fieldset>
     <legend>Category</legend>
     <label for="category">Category:
-    <input type="text" name="category" id="category"
-    value="<%= @contact[:category] %>">
-    </label>
+    <select name="category" id="category">
+        <% @categories.each do |category| %>
+          <% if category == @contact[:category] %>
+          <option value="<%= category %>" selected>
+          <% else %>
+          <option value="<%= category %>">
+          <% end %>
+            <%= category %>
+          </option>
+        <% end %>
+    </select>
   </fieldset><br>
 
   <input type="submit" value="Edit contact" id="save-button">

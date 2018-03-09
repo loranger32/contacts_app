@@ -65,9 +65,11 @@
   <fieldset>
     <legend>Category</legend>
     <label for="category">Category:
-    <input type="text" name="category" id="category"
-    value="<%= params[:category] %>">
-    </label>
+    <select name="category" id="category">
+        <% @categories.each do |category| %>
+          <option value="<%= category %>"><%= category %></option>
+        <% end %>
+    </select>
   </fieldset><br>
 
   <input type="submit" value="Save contact" id="save-button">

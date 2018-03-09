@@ -11,3 +11,15 @@
   :mail_adress: ''
   :birthdate: ''
   :category: Friends
+- :id: 18
+  :first_name: Music
+  :last_name: Fan
+  :street: ''
+  :number: ''
+  :zipcode: ''
+  :city: ''
+  :country: ''
+  :phone_number: ''
+  :mail_adress: ''
+  :birthdate: ''
+  :category: None

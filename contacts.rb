@@ -300,6 +300,7 @@ end
 # Page for adding a new contact
 get '/contacts/new' do
   redirect_logged_out_users_to('/')
+  @categories = load_categories
 
   erb :new_contact, layout: :layout
 end
@@ -339,6 +340,8 @@ end
 # Page to edit a contact
 get '/contacts/:id/edit' do
   redirect_logged_out_users_to('/')
+
+  @categories = load_categories
 
   id = params[:id].to_i
   @contact = find_contact_by(id)
