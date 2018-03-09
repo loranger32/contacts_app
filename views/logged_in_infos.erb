@@ -2,5 +2,8 @@
   <p>Logged in as : <%= @username %>.</p><br>
   <form action="/users/signout" method="post">
     <input type="submit" value="Sign out">
+    <% if admin? %>
+    <a href="/users">Administrate users</a>
+    <% end %>
   </form>
 </aside>

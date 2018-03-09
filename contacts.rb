@@ -61,6 +61,10 @@ def redirect_logged_out_users_to(route)
   end
 end
 
+def admin?
+  session[:username] == 'admin'
+end
+
 ######### File paths
 
 def users_path
@@ -477,8 +481,17 @@ post '/users' do
 end
 
 # Delete user (only for admin)
-post '/users/delete' do
+post '/users/:user_name/delete' do
   redirect_non_admin_user_to('/')
+
+  user = params[:user_name]
+  users = load_users
+
+  users.delete(user)
+
+  save_to_file!(users_path, users)
+  session[:success] = "User has been successfully deleted"
+  redirect '/users'
 end
 
 # Sign in
