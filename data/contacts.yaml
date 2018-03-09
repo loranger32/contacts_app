@@ -1,25 +1,13 @@
 ---
-- :id: 17
-  :first_name: Roger
-  :last_name: Brutus
-  :street: ''
-  :number: ''
-  :zipcode: ''
-  :city: ''
-  :country: ''
-  :phone_number: ''
-  :mail_adress: ''
+- :id: 1
+  :first_name: Alfred
+  :last_name: Caribou
+  :street: Rue de la louve
+  :number: 22
+  :zipcode: 5896
+  :city: happy city
+  :country: webland
+  :phone_number: 123 - 5698 -352
+  :mail_adress: alfred.caribou@example.com
   :birthdate: ''
   :category: Friends
-- :id: 18
-  :first_name: Music
-  :last_name: Fan
-  :street: ''
-  :number: ''
-  :zipcode: ''
-  :city: ''
-  :country: ''
-  :phone_number: ''
-  :mail_adress: ''
-  :birthdate: ''
-  :category: None
