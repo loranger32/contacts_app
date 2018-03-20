@@ -488,6 +488,12 @@ post '/users/:user_name/delete' do
   redirect_non_admin_user_to('/')
 
   user = params[:user_name]
+  
+  if user == 'admin'
+    session[:errors] = "Admin cannot be deleted that way"
+    redirect '/users'
+  end
+  
   users = load_users
 
   users.delete(user)
